@@ -10,10 +10,7 @@ import com.zj.xzOj.common.ResultUtils;
 import com.zj.xzOj.constant.UserConstant;
 import com.zj.xzOj.exception.BusinessException;
 import com.zj.xzOj.exception.ThrowUtils;
-import com.zj.xzOj.model.dto.question.QuestionAddRequest;
-import com.zj.xzOj.model.dto.question.QuestionEditRequest;
-import com.zj.xzOj.model.dto.question.QuestionQueryRequest;
-import com.zj.xzOj.model.dto.question.QuestionUpdateRequest;
+import com.zj.xzOj.model.dto.question.*;
 import com.zj.xzOj.model.entity.Question;
 import com.zj.xzOj.model.entity.User;
 import com.zj.xzOj.model.vo.QuestionVO;
@@ -21,9 +18,12 @@ import com.zj.xzOj.service.QuestionService;
 import com.zj.xzOj.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -50,18 +50,29 @@ public class QuestionController {
         if (questionAddRequest == null) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
+        //将封装类转化为实体类（注意将封装类中的list数组转化为json类型）
         Question question = new Question();
         BeanUtils.copyProperties(questionAddRequest, question);
         List<String> tags = questionAddRequest.getTags();
         if (tags != null) {
             question.setTags(JSONUtil.toJsonStr(tags));
         }
+        List<JudgeCase> judgeCase = questionAddRequest.getJudgeCase();
+        if(!CollectionUtils.isEmpty(judgeCase)){
+            question.setJudgeCase(JSONUtil.toJsonStr(judgeCase));
+        }
+        JudgeConfig judgeConfig = questionAddRequest.getJudgeConfig();
+        if (judgeConfig!=null){
+            question.setJudgeConfig(JSONUtil.toJsonStr(judgeConfig));
+        }
         questionService.validQuestion(question, true);
+        //获取登录用户信息
         User loginUser = userService.getLoginUser(request);
         question.setUserId(loginUser.getId());
         question.setFavourNum(0);
         question.setThumbNum(0);
         boolean result = questionService.save(question);
+        //保存失败，抛出异常
         ThrowUtils.throwIf(!result, ErrorCode.OPERATION_ERROR);
         long newQuestionId = question.getId();
         return ResultUtils.success(newQuestionId);
