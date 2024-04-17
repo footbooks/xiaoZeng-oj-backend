@@ -37,7 +37,7 @@ public class QuestionSubmitController {
     /**
      * 提交题目
      */
-    @PostMapping("/")
+    @PostMapping("/do")
     public BaseResponse<Long> doQuestionSubmit(@RequestBody QuestionSubmitAddRequest questionSubmitAddRequest,
             HttpServletRequest request) {
         if (questionSubmitAddRequest == null || questionSubmitAddRequest.getQuestionId() <= 0) {
