@@ -5,7 +5,7 @@ import com.zj.xzOj.model.entity.Question;
 import cn.hutool.json.JSONUtil;
 import com.zj.xzOj.model.dto.question.JudgeCase;
 import com.zj.xzOj.model.dto.question.JudgeConfig;
-import com.zj.xzOj.model.dto.questionsubmit.JudgeInfo;
+import com.zj.xzOj.judge.codesandbox.model.JudgeInfo;
 import com.zj.xzOj.model.enums.JudgeInfoMessageEnum;
 
 import java.util.List;
