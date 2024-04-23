@@ -101,4 +101,4 @@ knife4j:
         api-rule-resources:
           - com.zj.xzOj.controller
 codesandbox:
-  type:example
+  type:remote
