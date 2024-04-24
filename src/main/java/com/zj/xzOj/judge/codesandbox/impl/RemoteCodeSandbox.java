@@ -20,7 +20,7 @@ public class RemoteCodeSandbox implements CodeSandbox {
     @Override
     public ExecuteCodeResponse executeCode(ExecuteCodeRequest excuteCodeRequest) {
         System.out.println("远程代码沙箱");
-        String url = "http://localhost:8130/ececuteCode";
+        String url = "http://localhost:8130/executeCode";
         String json = JSONUtil.toJsonStr(excuteCodeRequest);
         //调用第三方接口
         String responseBody = HttpUtil.createPost(url)

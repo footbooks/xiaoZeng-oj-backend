@@ -35,6 +35,7 @@ public class JudgeServiceImpl implements JudgeService {
     private JudgeManager judgeManager;
     @Value("${codesandbox.type:example}")
     private String type;
+
     @Override
     public QuestionSubmit doJudge(long questionSubmitId) {
         //1.参数校验
@@ -86,7 +87,7 @@ public class JudgeServiceImpl implements JudgeService {
         //5.修改数据库中的判题结果
         questionSubmitUpdate = new QuestionSubmit();
         questionSubmitUpdate.setId(questionSubmitId);
-        if (!judgeInfo.getMessage().equals(JudgeInfoMessageEnum.ACCEPTED)){
+        if (!judgeInfo.getMessage().equals(JudgeInfoMessageEnum.ACCEPTED.getValue())){
             questionSubmitUpdate.setStatus(QuestionSubmitStatusEnum.FAILED.getValue());
         }else{
             questionSubmitUpdate.setStatus(QuestionSubmitStatusEnum.SUCCEED.getValue());

@@ -100,5 +100,6 @@ knife4j:
         api-rule: package
         api-rule-resources:
           - com.zj.xzOj.controller
+# 代码沙箱配置
 codesandbox:
-  type:remote
+  type: remote

@@ -11,10 +11,15 @@ import com.zj.xzOj.constant.UserConstant;
 import com.zj.xzOj.exception.BusinessException;
 import com.zj.xzOj.exception.ThrowUtils;
 import com.zj.xzOj.model.dto.question.*;
+import com.zj.xzOj.model.dto.questionsubmit.QuestionSubmitAddRequest;
+import com.zj.xzOj.model.dto.questionsubmit.QuestionSubmitQueryRequest;
 import com.zj.xzOj.model.entity.Question;
+import com.zj.xzOj.model.entity.QuestionSubmit;
 import com.zj.xzOj.model.entity.User;
+import com.zj.xzOj.model.vo.QuestionSubmitVO;
 import com.zj.xzOj.model.vo.QuestionVO;
 import com.zj.xzOj.service.QuestionService;
+import com.zj.xzOj.service.QuestionSubmitService;
 import com.zj.xzOj.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
@@ -36,9 +41,10 @@ public class QuestionController {
 
     @Resource
     private QuestionService questionService;
-
     @Resource
     private UserService userService;
+    @Resource
+    private QuestionSubmitService questionSubmitService;
 
     // region 增删改查
 
@@ -215,6 +221,33 @@ public class QuestionController {
         }
         boolean result = questionService.updateById(question);
         return ResultUtils.success(result);
+    }
+
+
+    /**
+     * 提交题目
+     */
+    @PostMapping("/question_submit/do")
+    public BaseResponse<Long> doQuestionSubmit(@RequestBody QuestionSubmitAddRequest questionSubmitAddRequest,
+                                               HttpServletRequest request) {
+        if (questionSubmitAddRequest == null || questionSubmitAddRequest.getQuestionId() <= 0) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        }
+        // 登录才能提交
+        final User loginUser = userService.getLoginUser(request);
+        long result = questionSubmitService.doQuestionSubmit(questionSubmitAddRequest, loginUser);
+        return ResultUtils.success(result);
+    }
+    @PostMapping("/question_submit/list/page")
+    public BaseResponse<Page<QuestionSubmitVO>> listQuestionSubmitByPage(@RequestBody QuestionSubmitQueryRequest questionSubmitQueryRequest, HttpServletRequest request){
+        long pageSize = questionSubmitQueryRequest.getPageSize();
+        long current = questionSubmitQueryRequest.getCurrent();
+        //查询提交信息
+        Page<QuestionSubmit> questionSubmitPage = questionSubmitService.page(new Page<>(current, pageSize),
+                questionSubmitService.getQueryWrapper(questionSubmitQueryRequest));
+        User loginUser = userService.getLoginUser(request);
+        //脱敏
+        return ResultUtils.success(questionSubmitService.getQuestionSubmitVOPage(questionSubmitPage,loginUser));
     }
 
 }

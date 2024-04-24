@@ -9,6 +9,7 @@ import com.zj.xzOj.judge.codesandbox.model.JudgeInfo;
 import com.zj.xzOj.model.enums.JudgeInfoMessageEnum;
 
 import java.util.List;
+import java.util.Optional;
 
 public class JavaLanguageJudgeStrategy implements JudgeStrategy {
     @Override
@@ -18,7 +19,7 @@ public class JavaLanguageJudgeStrategy implements JudgeStrategy {
         List<String> outputList = judgeContext.getOutputList();
         Question question = judgeContext.getQuestion();
         List<JudgeCase> judgeCaseList = judgeContext.getJudgeCaseList();
-        Long memory = judgeInfo.getMemory();
+        Long memory = Optional.ofNullable(judgeInfo.getMemory()).orElse(0L);
         Long time = judgeInfo.getTime();
         JudgeInfo judgeInfoResponse = new JudgeInfo();
         judgeInfoResponse.setMemory(memory);
