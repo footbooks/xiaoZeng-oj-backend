@@ -1,6 +1,8 @@
-package com.zj.xzOj.service;
+package com.zj.springbootinit.service;
 
 import javax.annotation.Resource;
+
+import com.zj.xzOj.service.UserService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

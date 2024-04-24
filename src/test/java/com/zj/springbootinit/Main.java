@@ -1,4 +1,4 @@
-package com.yupi.springbootinit;
+package com.zj.springbootinit;
 
 public class Main {
 

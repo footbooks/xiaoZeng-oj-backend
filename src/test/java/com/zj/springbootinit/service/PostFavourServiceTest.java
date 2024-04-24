@@ -1,10 +1,12 @@
-package com.zj.xzOj.service;
+package com.zj.springbootinit.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.zj.xzOj.model.entity.Post;
 import com.zj.xzOj.model.entity.User;
 import javax.annotation.Resource;
+
+import com.zj.xzOj.service.PostFavourService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;

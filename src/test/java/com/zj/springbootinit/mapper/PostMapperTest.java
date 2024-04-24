@@ -1,5 +1,6 @@
-package com.zj.xzOj.mapper;
+package com.zj.springbootinit.mapper;
 
+import com.zj.xzOj.mapper.PostMapper;
 import com.zj.xzOj.model.entity.Post;
 import java.util.Date;
 import java.util.List;

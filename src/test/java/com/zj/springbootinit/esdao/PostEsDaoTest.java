@@ -1,5 +1,6 @@
-package com.zj.xzOj.esdao;
+package com.zj.springbootinit.esdao;
 
+import com.zj.xzOj.esdao.PostEsDao;
 import com.zj.xzOj.model.dto.post.PostEsDTO;
 import com.zj.xzOj.model.dto.post.PostQueryRequest;
 import com.zj.xzOj.model.entity.Post;

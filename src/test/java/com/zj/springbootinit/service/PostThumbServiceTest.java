@@ -1,7 +1,9 @@
-package com.zj.xzOj.service;
+package com.zj.springbootinit.service;
 
 import com.zj.xzOj.model.entity.User;
 import javax.annotation.Resource;
+
+import com.zj.xzOj.service.PostThumbService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;

@@ -1,4 +1,4 @@
-package com.zj.xzOj;
+package com.zj.springbootinit;
 
 import com.zj.xzOj.config.WxOpenConfig;
 import javax.annotation.Resource;

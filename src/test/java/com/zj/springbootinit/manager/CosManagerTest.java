@@ -1,6 +1,8 @@
-package com.zj.xzOj.manager;
+package com.zj.springbootinit.manager;
 
 import javax.annotation.Resource;
+
+import com.zj.xzOj.manager.CosManager;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
